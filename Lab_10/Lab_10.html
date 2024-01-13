@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab_10</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{height:100vh;
+            overflow-x:hidden;
+            overflow-y:hidden;
+            display: none;
+            flex-direction:column;
+            justify-content: center;
+            align-items:center;
+            margin: 0;
+            padding: 0;
+            background-color: white;}
+        #button{width:140px;
+            background-color:lawngreen;
+            height:50px;
+            border-radius:10px;
+            font-size:20px;
+            font-family:sans-serif;
+            margin:0px 0px 30px;}
+        #attempts{font-size:20px;
+            font-family:sans-serif;
+            margin:10px 0px;
+            height:23px;}
+        .name{width:100%;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            align-items:center;
+            align-content:center;
+            margin-top:25px;}
+        .names{font-size:25px;
+            font-weight:bold;
+            font-family:sans-serif;
+            width:150px;
+            display:flex;
+            justify-content:center;}
+        .column{display:inline-block;}
+        .content {font-size: 0;
+            background-color: rgb(135, 167, 194);}
+        #img_col1, #img_col2, #img_col3{ height: 268px;
+            width:80px;
+            border: 5px solid;
+            border-image: radial-gradient(circle, white, darkgray, dimgray) 1;
+            border-radius: 10px;}
+        img{width:80px;
+            height: 100%;
+            border-top: 5px solid dimgray; 
+            border-bottom: 5px solid dimgray;
+            background-color: rgb(135, 167, 194);}
+    </style>
+</head>
+<body onload="usName()">
+    <div class="name">
+        <div id="us_name" class="names"></div>
+    </div>
+    <div id="attempts"></div>
+    <button id="button" onclick="generate()">Generate</button>
+    <div class="content">
+        <div id="img_col1" class="column">
+            <div id="img1-1"><img src="background.png"></div>
+            <div id="img1-2"><img src="background.png"></div>
+            <div id="img1-3"><img src="background.png"></div>
+        </div>
+        
+        <div id="img_col2" class="column">
+            <div id="img2-1"><img src="background.png"></div>
+            <div id="img2-2"><img src="background.png"></div>
+            <div id="img2-3"><img src="background.png"></div>
+        </div>
+        
+        <div id="img_col3" class="column">
+            <div id="img3-1"><img src="background.png"></div>
+            <div id="img3-2"><img src="background.png"></div>
+            <div id="img3-3"><img src="background.png"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+let attempt=0;
+let SlotImages = ["apple.png", "banana.png", "blueberry.png", "broccoli.png", "carrot.png", "grape.png", "background.png"];
+
+function usName(){
+    let name = prompt("Введіть Ваше ім'я:", "User");
+    if (name !== null) {
+            document.getElementById('us_name').innerHTML = name;
+        } else {
+            document.getElementById('us_name').innerHTML = "User";
+    }
+    document.getElementById('attempts').innerHTML = "Спроба " + attempt + " з 3";
+    document.body.style.display = "flex";
+}
+
+function firstImageIndex(a) {
+    return (a === 0) ? 5 : a - 1;
+}
+
+function thirdImageIndex(a) {
+    return (a === 5) ? 0 : a + 1;
+}
+
+function updateSlotImage(elementId, value, imgIndexFunction = null) {
+    let result = imgIndexFunction ? imgIndexFunction(value) : value;
+    document.getElementById(elementId).innerHTML = `<img src="${SlotImages[result]}">`;
+}
+
+function index(){
+    return Math.round(Math.random() * (SlotImages.length - 2))
+}
+
+function compare(a, b, c){
+    if(a == b && b == c)setTimeout(() => confirm("Ви виграли!") ? document.location.reload() : document.location.reload(), 100);
+}
+
+function generateAttempt(){
+    let column1=index();
+    let column2=index();
+    let column3=index();
+
+    updateSlotImage('img1-1', column1, firstImageIndex);
+    updateSlotImage('img1-2', column1);
+    updateSlotImage('img1-3', column1, thirdImageIndex);
+
+    updateSlotImage('img2-1', column2, firstImageIndex);
+    updateSlotImage('img2-2', column2);
+    updateSlotImage('img2-3', column2, thirdImageIndex);
+
+    updateSlotImage('img3-1', column3, firstImageIndex);
+    updateSlotImage('img3-2', column3);
+    updateSlotImage('img3-3', column3, thirdImageIndex);
+    
+    compare(column1, column2, column3);
+}
+
+function generate(){    
+    attempt+=1;
+    document.getElementById('attempts').innerHTML = "Спроба " + attempt + " з 3";
+    
+    generateAttempt();  
+    
+    if(attempt == 3) setTimeout(() => confirm("Ви програли.") ? document.location.reload() : document.location.reload(), 100);   
+} 
+</script>

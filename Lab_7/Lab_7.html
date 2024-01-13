@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab_7</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: black;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .explain_content {
+            display: flex;
+            width: 30;
+            margin: 0 auto;
+        }
+        .explain {
+            display: flex;
+            flex-direction: column;
+            background-color: #21082e;
+            padding: 7px;
+            border-radius: 10px;
+        }
+        #question{display:flex;
+            width:95%;
+            padding:5px;
+            background-color:#e0a3ff;
+            font-family:sans-serif;
+            font-size:13px;
+            text-align: center;
+            border-radius:25px;}  
+        .ball{margin:15px 0px;
+            position:relative;
+            justify-content:center;
+            display:flex;
+            align-items:center;}
+        .text{display:flex;
+            justify-content:center;
+            text-align:center;
+            align-items:center;
+            position:absolute;
+            padding:10px;
+            width:12%;
+            height:24%;
+            top:35%;
+            left:43%;
+            z-index:1;
+            color:white;
+            font-family:sans-serif;
+            font-size:20px;
+            line-height:20px;
+            text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black, 1px 1px black, -1px -1px black, -1px 1px black, 1px -1px black;}
+        p{text-align:center;
+            border-radius:5px;
+            color:#e0a3ff;
+            font-family:sans-serif;
+            font-size:16px;
+            line-height:22px;}
+        img{width: 100%;
+            max-width: 400px;
+            height: auto;
+            z-index:-1;
+            border-radius: 50%;
+            box-shadow: 0 0 7px 7px #21082e;}
+        
+        @media screen and (max-width:900px){
+            .explain_content{
+                width:45%;}
+            p{
+                font-size:15px;
+                line-height:19px;}
+            #question{
+                font-size:19px;}
+            .text{width:20%;
+                height:27%;
+                top:35%;
+                left:39%;
+                font-size:18px;}}
+        @media screen and (max-width:610px){
+            .explain_content{
+                width:45%;}
+            p{
+                font-size:15px;
+                line-height:19px;}
+            #question{
+                font-size:19px;}
+            .text{
+                width:25%;
+                height:29%;
+                top:34%;
+                left:36%;
+                font-size:18px;}}
+        @media screen and (max-width:400px){
+            .explain_content{
+                width:65%;}
+            p{
+                font-size:15px;
+                line-height:20px;}
+            #question{
+                font-size:10px;}
+            .text{
+                width:22%;
+                height:25%;
+                top:34%;
+                left:36.8%;
+                font-size:12px;}}
+        </style>
+</head>
+<body>
+</body>
+</html>
+
+
+<script>
+document.body.innerHTML=`
+    <div class="explain_content">
+        <div class="explain"><p>Напишіть питання та натисніть на магічний шар.</p>
+            <input type="text" id="question">
+        </div> 
+    </div> 
+    <div class="ball_content"> 
+        <div class="ball">
+            <span id="text" class="text" onclick="answer()"></span>
+            <img src="magicBall.png" alt="magicBall">
+        </div>
+    </div>`;
+
+let answers = [
+    'Так', 'Ні', 'Можливо', 'Точно!', 'Абсолютно ні', 'Запитайте ще раз пізніше', 'Все вказує на те, що так', 'Перспективи не дуже хороші',
+    'Без сумніву', 'Не розраховуйте на це', 'Дуже ймовірно', 'Не в цьому житті', 'Це точно', 'Малоймовірно', 'Відповідь нечітка, спробуйте ще раз',
+    'Дуже ймовірно', 'Мої джерела кажуть, що ні', 'Це точно!', 'Я б не став на це рохразовувати', 'Як на мене, так'];
+
+function answer(){
+    if (question.value.length>0){
+        let answer = answers[Math.floor(Math.random() * answers.length)];
+        document.getElementById('text').innerHTML = answer;}
+    else document.getElementById('text').innerHTML = "Будь ласка, введіть питання.";
+    }
+</script>

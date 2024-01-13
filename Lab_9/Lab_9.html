@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab_9</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body{height:100vh;
+            overflow-x:hidden;
+            overflow-y:hidden;
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items:center;
+            margin: 0;
+            padding: 0;
+            background-color:white;}
+        #button{width:175px;
+            background-color:lawngreen;
+            height:70px;
+            border-radius:10px;
+            font-size:25px;
+            font-family:sans-serif;
+            margin-bottom:15px;}
+        #attempts{font-size:20px;
+            font-family:sans-serif;
+            margin-bottom:10px;
+            height:23px;}
+        .content{width:100%;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            align-items:center;
+            align-content:center;}
+        .names{font-size:20px;
+            font-weight:bold;
+            font-family:sans-serif;
+            width:150px;
+            display:flex;
+            justify-content:center;
+            margin:10px auto 0px;}
+        .scores{background-color:#1E90FF;
+            width:125px;
+            height:40px;
+            border-radius:10px;
+            display:flex;
+            font-size:25px;
+            font-weight: bold;
+            font-family:sans-serif;
+            justify-content:center;    
+            align-items:center;
+            margin:0px auto;}
+        .cards{margin:20px auto;
+            height: 290px;}
+        img{height: 100%;}
+
+        @media screen and (max-height:550px){
+            #attempts{margin-top:35px;}}
+        @media screen and (max-height:460px){
+            #attempts{margin-top:5px;}}
+        @media screen and (max-height:385px){
+            .scores{width:105px;
+                height:30px;
+                font-size:20px;}
+            .names{font-size:17px;
+                margin-top:0px;}
+            #button{width:125px;
+                height:40px;
+                font-size:18px;
+                margin-bottom:5px;}
+            #attempts{font-size:17px;
+                margin-bottom:10px;}
+                .cards{margin-top:5px;}}
+
+        @media screen and (max-width:1500px){
+            img{width:200px;}}
+        @media screen and (max-width:1000px){
+            .cards{height: 230px;}
+            img{width: 160px;}}
+    </style>
+</head>
+<body onload="userName()">
+    <div id="attempts"></div>
+    <button id="button" onclick="generate()">Generate</button>
+    <div class="content">
+        <div id="us_name" class="names"></div>  
+        <div id="comp_name" class="names">Computer</div>
+    </div>
+    <div class="content">
+        <div id="us_score" class="scores">0</div>
+        <div id="comp_score" class="scores">0</div>
+    </div>
+    <div class="content">
+        <div id="us_card" class="cards"></div>
+        <div id="comp_card" class="cards"></div>
+    </div>
+</body>
+</html>
+
+<script>
+let usScore = 0;
+let computerScore = 0;
+let attempt = 0;
+let cardImages = ["6_of_clubs.png", "6_of_diamonds.png", "6_of_hearts.png", "6_of_spades.png",
+    "7_of_clubs.png", "7_of_diamonds.png", "7_of_hearts.png", "7_of_spades.png",
+    "8_of_clubs.png", "8_of_diamonds.png", "8_of_hearts.png", "8_of_spades.png",
+    "9_of_clubs.png", "9_of_diamonds.png", "9_of_hearts.png", "9_of_spades.png",
+    "10_of_clubs.png", "10_of_diamonds.png", "10_of_hearts.png", "10_of_spades.png",
+    "jack_of_clubs2.png", "jack_of_diamonds2.png", "jack_of_hearts2.png", "jack_of_spades2.png",
+    "queen_of_clubs2.png", "queen_of_diamonds2.png", "queen_of_hearts2.png", "queen_of_spades2.png",
+    "king_of_clubs2.png", "king_of_diamonds2.png", "king_of_hearts2.png", "king_of_spades2.png",
+    "ace_of_clubs.png", "ace_of_diamonds.png", "ace_of_hearts.png", "ace_of_spades.png"];
+
+function userName(){
+    let name = prompt("Введіть Ваше ім'я:", "User");
+    if (name !== null) {
+            document.getElementById('us_name').innerHTML = name;
+        } else {
+            document.getElementById('us_name').innerHTML = "User";
+    }
+}
+
+function generate(){    
+    attempt += 1;
+    document.getElementById('attempts').innerHTML = "Спроба " + attempt + " з 3";
+
+    let usCard = Math.round(Math.random() * (cardImages.length - 1));
+    let computerCard = Math.round(Math.random() * (cardImages.length - 1));
+
+    document.getElementById('us_card').innerHTML = "<img src=" + cardImages[usCard] + ">";    
+    document.getElementById('comp_card').innerHTML = "<img src=" + cardImages[computerCard] + ">";
+
+    switch (true) {
+        case (usCard > -1 && usCard < 4):
+            usScore += 6;
+            break;
+        case (usCard > 3 && usCard < 8):
+            usScore += 7;
+            break;
+        case (usCard > 7 && usCard < 12):
+            usScore += 8;
+            break;
+        case (usCard > 11 && usCard < 16):
+            usScore += 9;
+            break;
+        case (usCard > 15 && usCard < 20):
+            usScore += 10;
+            break;
+        case (usCard > 19 && usCard < 24):
+            usScore += 2;
+            break;
+        case (usCard > 23 && usCard < 28):
+            usScore += 3;
+            break;
+        case (usCard > 24 && usCard < 32):
+            usScore += 4;
+            break;
+        default:
+            usScore += 11;
+    }
+    document.getElementById('us_score').innerHTML = usScore;
+
+    switch (true) {
+        case (computerCard > -1 && computerCard < 4):
+            computerScore += 6;
+            break;
+        case (computerCard > 3 && computerCard < 8):
+            computerScore += 7;
+            break;
+        case (computerCard > 7 && computerCard < 12):
+            computerScore += 8;
+            break;
+        case (computerCard > 11 && computerCard < 16):
+            computerScore += 9;
+            break;
+        case (computerCard > 15 && computerCard < 20):
+            computerScore += 10;
+            break;
+        case (computerCard > 19 && computerCard < 24):
+            computerScore += 2;
+            break;
+        case (computerCard > 23 && computerCard < 28):
+            computerScore += 3;
+            break;
+        case (computerCard > 24 && computerCard < 32):
+            computerScore += 4;
+            break;
+        default:
+            computerScore += 11;
+    }
+    document.getElementById('comp_score').innerHTML = computerScore;
+
+    if (attempt === 3) {
+        let message;
+
+        switch (true) {
+            case usScore > computerScore:
+                message = "Ви виграли!";
+                break;
+            case usScore < computerScore:
+                message = "Комп'ютер виграв!";
+                break;
+            default:
+                message = "Нічия!";
+                break;
+        }
+
+        setTimeout(() => {
+            confirm(message);
+            document.location.reload();
+        }, 100);
+    }
+}
+</script>

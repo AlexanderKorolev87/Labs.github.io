@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lab_8</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;}
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;}
+        .names, .scores, .points {
+            font-size: 25px;
+            font-weight: bold;
+            font-family: sans-serif;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 150px;
+            height: 45px;}      
+        .scores {background-color:#1E90FF;}
+        .points {
+            font-size: 45px;
+            width: 145px;
+            height: 145px;
+            border-radius: 50%;
+            border: 3px solid black;
+            background-color:yellow;
+            margin-top: 20px;}
+        #button {
+            width: 250px;
+            height: 100px;
+            background-color: lawngreen;
+            border-radius: 10px;
+            font-size: 35px;
+            font-weight: bold;
+            font-family: sans-serif;}
+
+        @media screen and (max-width: 900px) {        
+            #button{  width: 200px;
+                height: 75px;
+                font-size: 27px;}
+            .names, .scores, .points {
+                width: 110px;}
+            .names, .scores{font-size: 20px;}
+            .points{font-size: 30px;
+                height: 110px;
+                margin-top: 15px;}}
+        @media screen and (max-width: 650px) {
+            #button{  width: 125px;
+                height: 55px;
+                font-size: 17px;}
+            .names, .scores, .points {
+                width: 90px;}
+            .names, .scores{font-size: 15px;
+                height: 35px;}
+            .points{font-size: 20px;
+                height: 90px;
+                margin-top: 10px;
+                border: 2px solid black;}}      
+        @media screen and (max-width: 480px) {
+            #button{  width: 125px;
+                height: 55px;
+                font-size: 17px;}
+            .names, .scores, .points {
+                width: 90px;}
+            .names, .scores{font-size: 15px;
+                height: 35px;}
+            .points{font-size: 20px;
+                height: 90px;
+                margin-top: 10px;
+                border: 2px solid black;}}       
+    </style>
+</head>
+<body onload="userName()">
+    <div class="container">
+        <div>
+            <div id="usName" class="names"></div>
+            <div id="usScore" class="scores">0</div>
+            <div id="usPoint" class="points">0</div>
+        </div>
+
+        <button id="button" onclick="generatePoints()">Generate</button>
+
+        <div>
+            <div id="computerName" class="names">Computer</div>
+            <div id="computerScore" class="scores">0</div>
+            <div id="computerPoint" class="points">0</div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let usScore = 0;
+    let computerScore = 0;
+
+    function userName() {
+        let name = prompt("Введіть Ваше ім'я.", 'User');
+        if (name !== null) {
+            document.getElementById('usName').innerHTML = name;
+        } else {
+            document.getElementById('usName').innerHTML = "User";
+        }
+    }
+
+    function generatePoints() {
+        let usPoint = Math.floor(Math.random() * 11);
+        let computerPoint = Math.floor(Math.random() * 11);
+
+        document.getElementById('usPoint').innerHTML = usPoint;
+        document.getElementById('computerPoint').innerHTML = computerPoint;
+
+        if (usPoint == computerPoint) {
+            document.getElementById('usScore').innerHTML = ++usScore;
+            document.getElementById('computerScore').innerHTML = ++computerScore;
+        }
+
+        if (usPoint > computerPoint) {
+            document.getElementById('usScore').innerHTML = ++usScore;
+        } else {
+            document.getElementById('computerScore').innerHTML = ++computerScore;
+        }
+
+        if (usScore == 3 || computerScore == 3) {
+            if (usScore > computerScore) {
+                setTimeout(() => confirm("Ви виграли!") ? document.location.reload() : undefined, 100);
+            } else {
+                setTimeout(() => confirm("Комп'ютер виграв!") ? document.location.reload() : undefined, 100);
+            }
+        }
+    }
+</script>
