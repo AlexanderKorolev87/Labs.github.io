@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab_13</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
+    <style>
+        body{width:100vw;
+            height:100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x:hidden;
+            overflow-y:hidden;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            background:linear-gradient(180deg, #181b21 0%, #393e46 100%);}
+        .main{display:flex;
+            justify-content:center;
+            align-items:center;
+            align-content:center;
+            flex-direction:column;}
+        #b1, #b2, #b3, #b4{-webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            background-color:#0092ca;
+            color:#eeeeee;
+            height:65px;
+            width:300px;
+            border-radius:10px;
+            font-size:18px;
+            font-family: 'Tektur', sans-serif;
+            font-weight:bold;
+            margin-bottom:15px;
+            box-shadow: 5px 5px 5px 2px #13161b;}
+            #b1:hover {background-image: url('lab_7_1.png');
+            background-size:cover;
+            background-position: center; 
+            color:#eeeeee;}
+            #b2:hover {background-image: url('lab_8_1.png');
+            background-size:cover;
+            background-position: center; 
+            color:black;}
+            #b3:hover {background-image: url('lab_9_1.png');
+            background-size:cover;
+            background-position: center; 
+            color:black;}
+            #b4:hover {background-image: url('lab_10_1.png');
+            background-size:cover;
+            background-position: center; 
+            color:black;}
+            @media screen and (min-width:1200px){
+            #b1, #b2, #b3, #b4 {height:85px;
+            width:400px;
+            font-size:20px;}}
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div><button id="b1" class="button" onclick="window.open('https://alexanderkorolev87.github.io/Labs.github.io/Lab_7/')">Магічна куля</button></div>
+        <div><button id="b2" class="button" onclick="window.open('https://alexanderkorolev87.github.io/Labs.github.io/')">Гра "В кого більше число?"</button></div>
+        <div><button id="b3" class="button" onclick="window.open('https://alexanderkorolev87.github.io/Labs.github.io/Lab_9/')">Гра "21"</button></div>
+        <div><button id="b4" class="button" onclick="window.open('https://alexanderkorolev87.github.io/Labs.github.io/Lab_10/')">Гра "Однорукий бандит"</button></div>
+    </div>
+</body>
+</html>
